@@ -1,12 +1,10 @@
 class tester_fifo;
-    localparam FW = 10;
-    localparam  DW = 32;
-    typedef logic Q fifo_t;
+    localparam  DW = 8;
     typedef logic [DW-1:0] data_t;
     virtual tb_fifo_if itf;
-    int [DW-1:0] ran_number;
     data_t Q_output;
     data_t expected_value;
+    data_t Q[$];
     int  push_counter;
 
     //========== Interface instance =================================================================
@@ -18,11 +16,11 @@ class tester_fifo;
     function automatic Generate_Random();
         itf.data_in = $random(1,20);
         return itf.data_in;
-    endtask
+    endfunction
 
     function automatic Random_flag();
-        Random_bit = $random(0,1);
-    end
+        Random_flag = $random(0,1);
+    endfunction
 
     //========== Generate signals =================================================================
     task automatic Push(input data_t data_in, input logic push, wrclk, wr_rst, output logic full);
@@ -73,13 +71,13 @@ class tester_fifo;
     //========== Golden Models =================================================================
     function Get_Reference();
         Get_Reference = Q.pop_back();
-    end
+    endfunction
 
     task Push_Validation(input logic wrclk, wr_rst);
         logic full;
         logic push  = Random_flag();
 
-        Push(.data_in(Generate_Random()), .push(push_tb), .wrclk(wrclk), .wr_rst(wr_rst), .full(full));
+        Push(.data_in(Generate_Random()), .push(push), .wrclk(wrclk), .wr_rst(wr_rst), .full(full));
 
         if (push) begin
             push_counter = push_counter + 1;
@@ -90,10 +88,10 @@ class tester_fifo;
         end
     endtask
 
-    task Pop_validation(input logic rdclk, rd_rst_tb, counter output data_t data_out, output logic empty);
-        Pop(.pop(Random_flag()), .rdclk(rdclk), .rd_rst(rd_rst_tb), .data_out(data_out), .empty(empty));
+    task Pop_validation(input logic rdclk, rd_rst, counter, output data_t data_out, output logic empty);
+        Pop(.pop(Random_flag()), .rdclk(rdclk), .rd_rst(rd_rst), .data_out(data_out), .empty(empty));
         expected_value = Get_Reference();
-        Fifos_Comparison(.expptected(expected_value), .obtained(data_out), .counter(counter), .empty(empty));
+        Fifos_Comparison(.expected(expected_value), .obtained(data_out), .counter(counter), .empty(empty));
         OverFlow_NoDataLost(.obtained(data_out), .counter(counter));
     endtask
     

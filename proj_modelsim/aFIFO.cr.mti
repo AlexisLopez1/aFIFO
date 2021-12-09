@@ -1,4 +1,18 @@
-/home/alopez/Projects/Verification/FIFO/src/tb_fifo_if.sv {1 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/FIFO/src/tb_fifo_if.sv
+/home/alopez/Projects/Verification/aFIFO/src/tester_fifo.svh {1 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/aFIFO/src/tester_fifo.svh
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling package tester_fifo_svh_unit
+
+Top level modules:
+	--none--
+
+} {} {}} /home/alopez/Projects/Verification/aFIFO/src/tb_fifo_pkg.sv {1 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/aFIFO/src/tb_fifo_pkg.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling package tb_fifo_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} /home/alopez/Projects/Verification/aFIFO/src/tb_fifo_if.sv {1 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/aFIFO/src/tb_fifo_if.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling interface tb_fifo_if
 -- Importing package tb_fifo_pkg
@@ -6,92 +20,22 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	--none--
 
-} {} {}} /home/alopez/Projects/Verification/FIFO/src/fifo_wrapper.sv {0 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/FIFO/src/fifo_wrapper.sv
+} {} {}} /home/alopez/Projects/Verification/aFIFO/src/fifo_wrapper.sv {0 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/aFIFO/src/fifo_wrapper.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module fifo_wrapper
--- Importing package tb_fifo_pkg
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/fifo_wrapper.sv(3): near "(": syntax error, unexpected '(', expecting ';' or ','.
+** Error: /home/alopez/Projects/Verification/aFIFO/src/fifo_wrapper.sv(2): (vlog-13006) Could not find the package (tb_fifo_pkg).  Design read will continue, but expect a cascade of errors after this failure.  Furthermore if you experience a vopt-7 error immediately before this error then please check the package names or the library search paths on the command line.
+** Error: (vlog-13069) /home/alopez/Projects/Verification/aFIFO/src/fifo_wrapper.sv(3): near "(": syntax error, unexpected '(', expecting ';' or ','.
 
-} {5.0 6.0} {}} /home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv {0 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv
+} {4.0 6.0} {}} /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv {0 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-** Warning: /home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv(2): (vlog-13304) Invalid use of Verilog config keyword 'include' found.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(4): near "fifo_t": syntax error, unexpected IDENTIFIER, expecting ';'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(7): Can't have packed array of integer type.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(21): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(24): (vlog-2730) Undefined variable: 'Random_bit'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(25): near "end": syntax error, unexpected end.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(29): (vlog-2730) Undefined variable: 'wrclk'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(30): (vlog-2730) Undefined variable: 'wr_rst'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(31): (vlog-2730) Undefined variable: 'push'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(32): (vlog-2730) Undefined variable: 'data_in'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(33): (vlog-2730) Undefined variable: 'full'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(38): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(42): (vlog-2730) Undefined variable: 'pop'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(43): (vlog-2730) Undefined variable: 'rdclk'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(44): (vlog-2730) Undefined variable: 'rd_rst'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(45): (vlog-2730) Undefined variable: 'data_out'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(46): (vlog-2730) Undefined variable: 'empty'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(47): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(53): (vlog-2730) Undefined variable: 'expected'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(53): (vlog-2730) Undefined variable: 'obtained'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(59): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(63): (vlog-2730) Undefined variable: 'counter'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(66): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(71): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(75): (vlog-2730) Undefined variable: 'Get_Reference'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(76): near "end": syntax error, unexpected end.
-** Error (suppressible): /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(79): (vlog-2388) 'full' already declared in this scope (Generate_Random) at /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(33).
-** Error (suppressible): /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(80): (vlog-2388) 'push' already declared in this scope (Generate_Random) at /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(31).
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(82): Illegal declaration after the statement near line '78'.  Declarations must precede statements.  Look for stray semicolons.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(91): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(98): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv(5): Illegal use of 'automatic' for variable declaration (clk).
-** Error: /home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv(6): Illegal use of 'automatic' for variable declaration (wr_rst_tb).
-** Error: /home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv(6): Illegal use of 'automatic' for variable declaration (rd_rst_tb).
-** Error: /home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv(7): Illegal use of 'automatic' for variable declaration (result_flag).
-** Error: /home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv(8): Illegal declaration after the statement near line '3'.  Declarations must precede statements.  Look for stray semicolons.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv(10): Illegal use of 'automatic' for variable declaration (t).
-** Error: /home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv(12): Illegal declaration after the statement near line '8'.  Declarations must precede statements.  Look for stray semicolons.
-/home/alopez/Projects/Verification/FIFO/src/tb_fifo.sv(17): Verilog Compiler exiting
+** Warning: /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(23): (vlog-2244) Variable 'wrclk' is implicitly static. You must either explicitly declare it as static or automatic
+or remove the initialization in the declaration of variable.
+** Warning: /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(24): (vlog-2244) Variable 'rdclk' is implicitly static. You must either explicitly declare it as static or automatic
+or remove the initialization in the declaration of variable.
+** Error: /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(28): Illegal declaration after the statement near line '22'.  Declarations must precede statements.  Look for stray semicolons.
+** Error: /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(28): (vlog-2730) Undefined variable: 'i'.
+** Error: (vlog-13069) /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(28): near ")": syntax error, unexpected ')', expecting ';'.
+** Error: (vlog-13069) /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(33): near "int": syntax error, unexpected "SystemVerilog keyword 'int'", expecting IDENTIFIER or genvar.
+** Error: /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(33): (vlog-13205) Syntax error found in the scope following 'i'. Is there a missing '::'?
 
-} {4.0 29.0 31.0 41.0} {}} /home/alopez/Projects/Verification/FIFO/src/tb_fifo_pkg.sv {1 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/FIFO/src/tb_fifo_pkg.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling package tb_fifo_pkg
-
-Top level modules:
-	--none--
-
-} {} {}} /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh {0 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh
-Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(4): near "fifo_t": syntax error, unexpected IDENTIFIER, expecting ';'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(7): Can't have packed array of integer type.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(21): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(24): (vlog-2730) Undefined variable: 'Random_bit'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(25): near "end": syntax error, unexpected end.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(29): (vlog-2730) Undefined variable: 'wrclk'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(30): (vlog-2730) Undefined variable: 'wr_rst'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(31): (vlog-2730) Undefined variable: 'push'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(32): (vlog-2730) Undefined variable: 'data_in'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(33): (vlog-2730) Undefined variable: 'full'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(38): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(42): (vlog-2730) Undefined variable: 'pop'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(43): (vlog-2730) Undefined variable: 'rdclk'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(44): (vlog-2730) Undefined variable: 'rd_rst'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(45): (vlog-2730) Undefined variable: 'data_out'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(46): (vlog-2730) Undefined variable: 'empty'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(47): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(53): (vlog-2730) Undefined variable: 'expected'.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(53): (vlog-2730) Undefined variable: 'obtained'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(59): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(63): (vlog-2730) Undefined variable: 'counter'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(66): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(71): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(75): (vlog-2730) Undefined variable: 'Get_Reference'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(76): near "end": syntax error, unexpected end.
-** Error (suppressible): /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(79): (vlog-2388) 'full' already declared in this scope (Generate_Random) at /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(33).
-** Error (suppressible): /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(80): (vlog-2388) 'push' already declared in this scope (Generate_Random) at /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(31).
-** Error: /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(82): Illegal declaration after the statement near line '78'.  Declarations must precede statements.  Look for stray semicolons.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(91): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/FIFO/src/tester_fifo.svh(98): near "endtask": syntax error, unexpected endtask, expecting endfunction.
-
-} {3.0 28.0 30.0 33.0} {}}
+} {7.0 12.0} {}}
