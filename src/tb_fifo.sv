@@ -20,11 +20,10 @@ module tb_fifo();
     fifo_wrapper dut(
         .itf(itf.aFIFO)
     );
-    
-    
+     
     //1st case: Check equal
     initial begin
-	t = new (itf);       
+	t = new (itf);      
 
         //Write
         for (i = 0; i <= 10; i++) begin
