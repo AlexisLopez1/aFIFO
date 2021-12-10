@@ -1,15 +1,9 @@
-`timescale 1ns / 1ps
-`include "tester_fifo.svh";
+include "tester_fifo.svh";
 module tb_fifo();
-    import tb_fifo_pkg::*;
-    logic clk;
-    logic result_flag;
-    logic wrclk = clk;
-    logic rdclk = clk;
-    logic rd_rst = 1;
-    logic wr_rst = 1;
+    import fifo_pkg::*;
+    bit clk = 0;
+    bit rst = 1;
     int  i;
-    data_t expected_value;
 	
     tester_fifo t;
 
@@ -18,8 +12,19 @@ module tb_fifo();
     );
 
     fifo_wrapper dut(
-        .itf(itf.fifo_top)
+    	.wrclk(clk),
+    	.wr_rst(rst),
+    	.rdclk(clk),
+   	.rd_rst(rst),
+	.data_in(itf.data_in),
+	.push(itf.push),
+    	.full(itf.full),
+    	.data_out(itf.data_out),
+    	.pop(itf.pop),
+	.empty(itf.empty)
     );
+
+   
      
     //1st case: Check equal
     initial begin
@@ -27,12 +32,12 @@ module tb_fifo();
 
         //Write
         for (i = 0; i <= 10; i++) begin
-            #10 t.Push_Validation(.wrclk(wrclk), .wr_rst(wr_rst));
+            #10 t.Push_Validation();
         end
       
         //Read
         for (i = 0; i <= 10; i++) begin
-            #10 t.Pop_validation(.rdclk(rdclk), .rd_rst(rd_rst), .counter(i), .data_out(itf.data_out), .empty(itf.empty));
+            #10 t.Pop_validation(.counter(i));
         end
     end
 
@@ -40,25 +45,29 @@ module tb_fifo();
     initial begin
 	//Write
         for (i = 0; i <= 20; i++) begin
-            #10 t.Push_Validation(.wrclk(wrclk), .wr_rst(wr_rst));
+            #10 t.Push_Validation();
         end
         
         //Read
           for (i = 0; i <= 20; i++) begin
-            #10 t.Pop_validation(.rdclk(rdclk), .rd_rst(rd_rst), .counter(i), .data_out(itf.data_out), .empty(itf.empty));
+            #10 t.Pop_validation(.counter(i));
         end
     end
 
     //3rd case: Underflow
     initial begin
         for (i = 0; i <= 15; i++) begin
-            #10 t.Push_Validation(.wrclk(wrclk), .wr_rst(wr_rst));
+            #10 t.Push_Validation();
         end
 
         //Read
           for (i = 0; i <= 20; i++) begin
-            #10 t.Pop_validation(.rdclk(rdclk), .rd_rst(rd_rst), .counter(i), .data_out(itf.data_out), .empty(itf.empty));
+            #10 t.Pop_validation(.counter(i));
         end
 
+    end
+
+    initial begin
+    	forever #1 clk = !clk;
     end
 endmodule

@@ -8,7 +8,7 @@ package fifo_pkg ;
     localparam  W_ADDR      = 4;
     localparam  ADDR_GRAY   = W_ADDR + 1;
     localparam  W_DEPTH     = 2**W_ADDR;
-	 localparam  ENB		    = 1'b1;
+    localparam  ENB         = 1'b1;
 
     typedef logic [W_DATA-1:0]        data_t;
     typedef logic [W_ADDR-1:0]        addr_t;

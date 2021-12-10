@@ -1,48 +1,34 @@
-interface tb_fifo_if(
+interface fifo_if(
     input clk
 );
-    import tb_fifo_pkg::*;
+    import fifo_pkg::*;
     
-    data_t   data_in;
-    logic    push;
-    bit      wrclk;
-    bit      wr_rst;
-    logic    full;  
-    data_t   data_out;
-    logic    pop;
-    bit      rdclk;
-    bit      rd_rst;
-    logic    empty;
+	//write process
+	push_e_t push;
+	logic 	full;
+	data_t  data_in;
+	// Read process
+	pop_e_t pop;
+	logic 	empty;
+	data_t	data_out;
     
 
-    modport tester(
-        //Write
-        output data_in,
-        output push,
-        output wrclk,
-        output wr_rst,
-        input full,
-        //Read
-        input data_out,
-        output pop,
-        output rdclk,
-        output rd_rst,
-        input empty
+    modport fifo(
+        input  push,
+	output full,
+	input  data_in,
+	input  pop,
+	output empty,
+	output data_out
     );
 
-    modport aFIFO(
-        //Write
-        input data_in,
-        input push,
-        input wrclk,
-        input wr_rst,
-        output full,
-        //Read
-        output data_out,
-        input pop,
-        input rdclk,
-        input rd_rst,
-        output empty
+    modport dvr(
+        output   push,
+	input    full,
+	output   data_in,
+	output   pop,
+	input    empty,
+	input    data_out
     );
 
 endinterface

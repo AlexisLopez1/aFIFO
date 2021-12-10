@@ -3,7 +3,7 @@
 module fifo_top
 import fifo_pkg::*;
 (
-	input bit 	      wr_clk,
+	input bit 	  wr_clk,
 	input bit         wr_rst,
 	input bit         rd_clk,
 	input bit         rd_rst,
