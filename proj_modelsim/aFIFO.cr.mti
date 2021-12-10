@@ -26,16 +26,4 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 ** Error: /home/alopez/Projects/Verification/aFIFO/src/fifo_wrapper.sv(2): (vlog-13006) Could not find the package (tb_fifo_pkg).  Design read will continue, but expect a cascade of errors after this failure.  Furthermore if you experience a vopt-7 error immediately before this error then please check the package names or the library search paths on the command line.
 ** Error: (vlog-13069) /home/alopez/Projects/Verification/aFIFO/src/fifo_wrapper.sv(3): near "(": syntax error, unexpected '(', expecting ';' or ','.
 
-} {4.0 6.0} {}} /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv {0 {vlog -work work -sv -stats=none /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-** Warning: /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(23): (vlog-2244) Variable 'wrclk' is implicitly static. You must either explicitly declare it as static or automatic
-or remove the initialization in the declaration of variable.
-** Warning: /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(24): (vlog-2244) Variable 'rdclk' is implicitly static. You must either explicitly declare it as static or automatic
-or remove the initialization in the declaration of variable.
-** Error: /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(28): Illegal declaration after the statement near line '22'.  Declarations must precede statements.  Look for stray semicolons.
-** Error: /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(28): (vlog-2730) Undefined variable: 'i'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(28): near ")": syntax error, unexpected ')', expecting ';'.
-** Error: (vlog-13069) /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(33): near "int": syntax error, unexpected "SystemVerilog keyword 'int'", expecting IDENTIFIER or genvar.
-** Error: /home/alopez/Projects/Verification/aFIFO/src/tb_fifo.sv(33): (vlog-13205) Syntax error found in the scope following 'i'. Is there a missing '::'?
-
-} {7.0 12.0} {}}
+} {4.0 6.0} {}}
