@@ -5,9 +5,13 @@ interface tb_fifo_if(
     
     data_t   data_in;
     logic    push;
-    logic    full;
+    bit      wrclk;
+    bit      wr_rst;
+    logic    full;  
     data_t   data_out;
     logic    pop;
+    bit      rdclk;
+    bit      rd_rst;
     logic    empty;
     
 
@@ -15,14 +19,14 @@ interface tb_fifo_if(
         //Write
         output data_in,
         output push,
-        //output wrclk,
-        //output wr_rst,
+        output wrclk,
+        output wr_rst,
         input full,
         //Read
         input data_out,
         output pop,
-        //output rdclk,
-        //output rd_rst,
+        output rdclk,
+        output rd_rst,
         input empty
     );
 
@@ -30,14 +34,14 @@ interface tb_fifo_if(
         //Write
         input data_in,
         input push,
-        //input wrclk,
-        //input wr_rst,
+        input wrclk,
+        input wr_rst,
         output full,
         //Read
         output data_out,
         input pop,
-        //input rdclk,
-        //input rd_rst,
+        input rdclk,
+        input rd_rst,
         output empty
     );
 

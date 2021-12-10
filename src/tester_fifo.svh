@@ -24,10 +24,10 @@ class tester_fifo;
 
     //========== Generate signals =================================================================
     task automatic Push(input data_t data_in, input logic push, wrclk, wr_rst, output logic full);
-        ift.wrclk = wrclk;
-        ift.wr_rst = wr_rst;
-        ift.push = push;
-        ift.data_in = data_in;
+        itf.wrclk = wrclk;
+        itf.wr_rst = wr_rst;
+        itf.push = push;
+        itf.data_in = data_in;
         full = itf.full;
 
         if(push) begin

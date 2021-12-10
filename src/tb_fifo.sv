@@ -18,7 +18,7 @@ module tb_fifo();
     );
 
     fifo_wrapper dut(
-        .itf(itf.aFIFO)
+        .itf(itf.fifo_top)
     );
      
     //1st case: Check equal

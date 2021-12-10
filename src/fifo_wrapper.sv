@@ -1,11 +1,11 @@
 module fifo_wrapper
 import tb_fifo_pkg::*;
+import fifo_pkg::*;
 (
     tb_fifo_if.aFIFO itf
 );
 
-
-aFIFO dut(
+fifo_top dut(
     .data_in    (itf.data_in),
     .push       (itf.push),
     .wrclk      (itf.wrclk),
