@@ -1,5 +1,5 @@
 module fifo_wrapper
-import tb_fifo_pkg::*
+import tb_fifo_pkg::*;
 (
     tb_fifo_if.aFIFO itf
 );

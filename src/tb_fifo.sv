@@ -16,21 +16,28 @@ module tb_fifo();
     fifo_wrapper dut(
         .itf(itf.aFIFO)
     );
-    
+    logic wrclk;
+    logic rdclk;
+    logic rd_rst_tb;
+    logic wr_rst_tb;
+    logic wr_rst;
+    logic rd_rst;
+    int i;
     //1st case: Check equal
     initial begin
 	t = new (itf);
-        logic wrclk = clk;
-        logic rdclk = clk;
-        
+        rclk = clk;
+        rdclk = clk;
+        wr_rst = 0;
+    	rd_rst = 0;
 
         //Write
-        for (int i = 0; i <= 10; i++) begin
+        for (i = 0; i <= 10; i++) begin
             #10 t.Push_Validation(.wrclk(wrclk), .wr_rst(wr_rst));
         end
       
         //Read
-        for (int i = 0; i <= 10; i++) begin
+        for (i = 0; i <= 10; i++) begin
             #10 t.Pop_validation(.rdclk(rdclk), .rd_rst_tb(rd_rst), .counter(i), .data_out(itf.data_out), .empty(itf.empty));
         end
     end
@@ -44,12 +51,12 @@ module tb_fifo();
         wr_rst = 1;
 
         //Write
-        for (int i = 0; i <= 20; i++) begin
+        for (i = 0; i <= 20; i++) begin
             #10 t.Push_Validation(.wrclk(wrclk), .wr_rst(wr_rst));
         end
         
         //Read
-          for (int i = 0; i <= 20; i++) begin
+          for (i = 0; i <= 20; i++) begin
             #10 t.Pop_validation(.rdclk(rdclk), .rd_rst(rd_rst), .counter(i), .data_out(itf.data_out), .empty(itf.empty));
         end
     end
@@ -62,12 +69,12 @@ module tb_fifo();
         rd_rst_tb = 1;
         wr_rst_tb = 1;
 
-        for (int i = 0; i <= 15; i++) begin
+        for (i = 0; i <= 15; i++) begin
             #10 t.Push_Validation(.wrclk(wrclk), .wr_rst(wr_rst));
         end
 
         //Read
-          for (int i = 0; i <= 20; i++) begin
+          for (i = 0; i <= 20; i++) begin
             #10 t.Pop_validation(.rdclk(rdclk), .rd_rst(rd_rst), .counter(i), .data_out(itf.data_out), .empty(itf.empty));
         end
 
