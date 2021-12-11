@@ -1,12 +1,4 @@
 class tester_fifo;
-	
-
-//===============================
-   // localparam  DW = 8;			
-    //typedef logic [DW-1:0] data_t;
-    
-//================================
-
     // Data Types
     localparam  W_DATA = 8;
 
@@ -38,30 +30,26 @@ class tester_fifo;
     endfunction
 
     //========== Generate randoms =================================================================
-    function automatic Generate_Random();
-        random = $random();
-        return random;
-    endfunction
-
     function automatic Random_flag();
         Random_flag = $urandom_range(1,0);
     endfunction
 
     //========== Generate signals =================================================================
-    task automatic Push(input data_t data_in, input push_e_t push,  output logic full);
+    task automatic Push(input push_e_t push,  output logic full);
+	random = $urandom_range(1,255);
 	itf.push = {push};
-        itf.data_in = data_in;
+        itf.data_in = random;
         full = itf.full;
-
+	
         if(push) begin
-            Q.push_front(data_in);
+            Q.push_front(random);
         end
     endtask
 
     
     task automatic Pop(input logic pop, output data_t data_out, output logic empty);
          itf.pop = {pop};   
-         itf.data_out = data_out;
+         data_out = itf.data_out;
 	 empty = itf.empty;
     endtask
      
@@ -70,17 +58,17 @@ class tester_fifo;
     // Compare if data expected is equal to obtained.
     task Fifos_Comparison(input data_t expected, obtained, input int counter, input logic empty);
         if (expected == obtained) begin
-            $display($time, "SUCCESS: Index = %d, Obtained = %b, expected = %b, Empty_Flag = %b", counter, expected, obtained, empty);
+            $display($time, " SUCCESS: Index = %d, Expected = %b, Obtained = %b, Empty_Flag = %b", counter, expected, obtained, empty);
         end
         else begin
-             $display($time, "ERROR: Index = %d, Obtained = %b, expected = %b, Empty_Flag = %b", counter, expected, obtained, empty);
+             $display($time, " ERROR: Index = %d, Expected = %b, Obtained = %b, Empty_Flag = %b", counter, expected, obtained, empty);
         end
     endtask
 
     //Verify size
     task OverFlow_NoDataLost(input data_t obtained, input int counter);
         if (!obtained && counter > 15) begin 
-            $display($time, "OVERFLOW: More data has been received than expected: Total = %d", counter);
+            $display($time, " OVERFLOW: More data has been received than expected: Total = %d", counter);
         end
     endtask
 
@@ -90,9 +78,6 @@ class tester_fifo;
     endtask
 
     //========== Golden Models =================================================================
-    function Get_Reference();
-        Get_Reference = Q.pop_back();
-    endfunction
 
     task Push_Validation();
         logic full;
@@ -100,7 +85,7 @@ class tester_fifo;
 
 	push = (Random_flag()) ? PUSH : NO_PUSH;
 
-        Push(.data_in(Generate_Random()),.push(push), .full(full));
+        Push(.push(push), .full(full));
 
         if (push == PUSH) begin
             push_counter = push_counter + 1;
@@ -119,8 +104,8 @@ class tester_fifo;
 	pop = (Random_flag()) ? POP : NO_POP;
 
         Pop(.pop(pop), .data_out(data_out), .empty(empty));
-        expected_value = Get_Reference();
-        Fifos_Comparison(.expected(expected_value), .obtained(data_out), .counter(counter), .empty(empty));
+        expected_value = Q.pop_front();
+	Fifos_Comparison(.expected(expected_value), .obtained(data_out), .counter(counter), .empty(empty));
         OverFlow_NoDataLost(.obtained(data_out), .counter(counter));
     endtask
     
