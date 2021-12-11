@@ -61,13 +61,14 @@ module tb_fifo();
         end
 
         //Read
-          for (i = 0; i <= 20; i++) begin
+         for (i = 0; i <= 20; i++) begin
             #10 t.Pop_validation(.counter(i));
         end
-
+	  $stop;
     end
 
     initial begin
     	forever #1 clk = !clk;
     end
+  
 endmodule

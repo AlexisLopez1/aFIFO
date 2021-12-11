@@ -1,4 +1,4 @@
-interface fifo_if(
+interface tb_fifo_if(
     input clk
 );
     import fifo_pkg::*;
