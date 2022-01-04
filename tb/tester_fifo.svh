@@ -1,20 +1,5 @@
-class tester_fifo;
-    // Data Types
-    localparam  W_DATA = 8;
-
-    typedef logic [W_DATA-1:0] data_t;
-    typedef enum logic {
-       NO_POP = 0,
-       POP = 1
-       }pop_e_t;
-
-    typedef enum logic {
-       NO_PUSH = 0,
-       PUSH = 1
-       } push_e_t;
-    
-    //Interface
-    virtual tb_fifo_if itf;
+import fifo_pkg::*;
+class tester_fifo #(parameter DEPTH = 16);
 
     //Local variables
     data_t Q_output;
@@ -25,34 +10,31 @@ class tester_fifo;
 
 
     //========== Interface instance =================================================================
-    function new(virtual tb_fifo_if.fifo t);
+    virtual fifo_if itf;
+
+    function new(virtual fifo_if.dvr t);
         itf = t;
     endfunction
 
-    //========== Generate randoms =================================================================
-    function automatic Random_flag();
-        Random_flag = $urandom_range(1,0);
-    endfunction
-
     //========== Generate signals =================================================================
-    task automatic Push(input push_e_t push,  output logic full);
-	random = $urandom_range(1,255);
-	itf.push = {push};
-        itf.data_in = random;
-        full = itf.full;
-	
-        if(push) begin
-            Q.push_front(random);
+    
+    task push_set();
+	    itf.push = push_e_t'($random());
+        itf.data_in = data_t'($random());
+
+        if (itf.push == PUSH && Q.size() <=  DEPTH) begin
+            Q.push_front(itf.data_in);
         end
     endtask
 
-    
-    task automatic Pop(input logic pop, output data_t data_out, output logic empty);
-         itf.pop = {pop};   
-         data_out = itf.data_out;
-	 empty = itf.empty;
+    task pop_get();
+        itf.pop = pop_e_t'($random());  
+        data_out = itf.data_out;
+	    empty = itf.empty;
     endtask
-     
+
+    //Contiue here... 
+
     //========== Verify and Display results ======================================================
     
     // Compare if data expected is equal to obtained.
@@ -79,22 +61,7 @@ class tester_fifo;
 
     //========== Golden Models =================================================================
 
-    task Push_Validation();
-        logic full;
-        push_e_t push;
-
-	push = (Random_flag()) ? PUSH : NO_PUSH;
-
-        Push(.push(push), .full(full));
-
-        if (push == PUSH) begin
-            push_counter = push_counter + 1;
-        end
-
-        if (push_counter > 15 && full) begin
-            Full_Error();
-        end
-    endtask
+    
 
     task Pop_validation(input int counter);
 	pop_e_t  pop;

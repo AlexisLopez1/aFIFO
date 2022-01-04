@@ -1,16 +1,14 @@
-interface fifo_if
+interface fifo_if();
 import fifo_pkg::*;
-();
-
 
 // write process
-push_e_t    push;
-logic 	   full;
-data_t      data_in;
+push_e_t	push;
+logic 	   	full;
+data_t		data_in;
 // Read process
-pop_e_t 	   pop;
-logic 	   empty;
-data_t      data_out;
+pop_e_t	pop;
+logic	empty;
+data_t	data_out;
 
 modport fifo (
 	input  push,
