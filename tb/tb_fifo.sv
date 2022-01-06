@@ -29,20 +29,23 @@ module tb_fifo();
     //1st case: Check equal
     initial begin
             rst = 1;
-        #5  rst = 0;
-        #6  rst = 1;
+        #2  rst = 0;
+        #3  rst = 1;
+        #50 rst = 0;
+        #51 rst = 1;
 
+
+    end
+
+    initial begin
 	    t = new (itf);      
+        
+        #4  t.expected_push_pop();
+        #52 t.expected_push_pop();
+    end
 
-        //Write
-        for (i = 0; i <= 10; i++) begin
-            #10 t.push_generation();
-        end
-      
-        //Read
-        for (i = 0; i <= 10; i++) begin
-            #10 t.Pop_validation(.counter(i));
-        end
+    always begin
+        forever clk = ~clk;
     end
 
     //2nd case: Overflow

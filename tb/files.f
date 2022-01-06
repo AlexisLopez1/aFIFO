@@ -1,8 +1,8 @@
-../src/fifo_pkg.sv
-../src/tb_fifo_pkg.sv
-../src/fifo_wrapper.sv
-../src/tb_fifo.sv
-../src/tb_fifo_if.sv
-../src/tester_fifo.svh
-../src/fifo_if.sv
 ../src/all_rtl_fifo.sv
+../src/fifo_if.sv
+../src/fifo_pkg.sv
+../src/fifo_wrapper.sv
+./tb_fifo.sv
+./tester_fifo.svh
+
+
