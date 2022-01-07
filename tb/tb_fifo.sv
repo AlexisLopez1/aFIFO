@@ -1,53 +1,67 @@
+//`timescale 1ns / 10ps
 include "tester_fifo.svh";
 module tb_fifo();
     import fifo_pkg::*;
-    bit clk = 0;
-    bit rst = 1;
-    int  i;
-	
+    bit wr_clk = 1'b0;
+    bit wr_rst = 1'b0;
+    bit rd_clk = 1'b0;
+    bit rd_rst = 1'b0;
+    
     tester_fifo #(.DEPTH(W_DEPTH)) t;
 
-    tb_fifo_if itf(
-        .clk(clk)
-    );
+    fifo_if itf();
 
-    fifo_wrapper dut(
-    	.wrclk(clk),
-    	.wr_rst(rst),
-    	.rdclk(clk),
-   	    .rd_rst(rst),
-	    .data_in(itf.data_in),
-	    .push(itf.push),
-    	.full(itf.full),
-    	.data_out(itf.data_out),
-    	.pop(itf.pop),
-	    .empty(itf.empty)
-    );
+    fifo_top DUT(
+	.wr_clk (wr_clk),
+	.wr_rst (wr_rst),
+	.rd_clk (clk_rd),
+	.rd_rst (rd_rst),
+	.itf	(itf.fifo));
 
-   
-     
+
     //1st case: Check equal
-    initial begin
-            rst = 1;
+    /*initial begin
+    	#0  clk = 0;
+        #0  rst = 1;
         #2  rst = 0;
         #3  rst = 1;
         #50 rst = 0;
         #51 rst = 1;
 
 
-    end
-
+    end*/
+    
     initial begin
+	fork
+		forever #1 wr_clk = ~wr_clk;
+		forever #1 rd_clk = ~rd_clk;
+	join
+    end
+    
+    initial begin	
+	
+        t = new(itf);
+
+	#2 wr_rst = 1'b1; rd_rst = 1'b1;
+	#2 wr_rst = 1'b0; rd_rst = 1'b0;
+	#2 wr_rst = 1'b1; rd_rst = 1'b1;
+
+	repeat (40) @(posedge wr_clk) t.push_generate(1);
+	repeat (40) @(posedge rd_clk) t.pop_generate(1);
+    end
+    
+    /*initial begin
 	    t = new (itf);      
         
-        #4  t.expected_push_pop();
-        #52 t.expected_push_pop();
+        #5  t.push_generate(16);
+        #5 t.pop_generate(16);
+        $stop();
     end
 
-    always begin
-        forever clk = ~clk;
-    end
-
+always begin
+	forever #1 clk = ~clk;
+end
+*/
     //2nd case: Overflow
     // initial begin
 	// //Write

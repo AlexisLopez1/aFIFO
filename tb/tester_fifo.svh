@@ -19,13 +19,26 @@ class tester_fifo #(parameter DEPTH = 16);
     //========== Generate signals ==================================================
     
     task push_generate(int iteration);
-	    #1
-        for (int i = 0; i <= iteration; i++) begin
+	    #0.1
+        for (int i = 0; i < iteration; i++) begin
             itf.push = push_e_t'($random());
             itf.data_in = data_t'($random());
-
+	     $display("Push_generate: %h, %b", itf.data_in, itf.push);
             if (itf.push == PUSH && Q.size() <=  DEPTH) begin
                 Q.push_front(itf.data_in);
+            end
+        end
+    endtask
+    
+    task pop_generate(int iteration);
+	    #0.1
+        for (int i = 0; i < iteration; i++) begin
+            itf.pop = pop_e_t'($random());
+            
+	     
+            if (itf.pop == POP) begin
+                Q.pop_back();
+                $display("Pop_generate: %h, %b", itf.data_out, itf.pop);
             end
         end
     endtask
@@ -35,8 +48,8 @@ class tester_fifo #(parameter DEPTH = 16);
     task expected_push_pop(int iteration = 16);
         int msg_code;
         push_generate(iteration);
-        #1;
-        for (int i = 0; i <= iteration; i++) begin
+        #0.1;
+        for (int i = 0; i < iteration; i++) begin
             itf.pop = pop_e_t'($random());
             if (itf.pop == POP) begin
                 expected_value = Q.pop_back();
@@ -52,7 +65,7 @@ class tester_fifo #(parameter DEPTH = 16);
     
     task message_handling(int msg_code, int iteration);
         case (msg_code)
-            0: $display($time, " %d SUCCESS: Expected = %b, Obtained = %b", iteration, expected_value, itf.data_out);
+            0: $display($time, " %d SUCCESS: Expected = %h, Obtained = %h", iteration, expected_value, itf.data_out);
             1: $display($time, " %d ERROR: Expected = %b, Obtained = %b", iteration, expected_value, itf.data_out);
             2: $display($time, " %d ERROR: An OVERFLOW has ocurred and FULL flag is down.", iteration);
             3: $display($time, " %d ERROR: An OVERFLOW has ocurred.", iteration);
