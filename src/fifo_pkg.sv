@@ -2,7 +2,7 @@
 // Description:     This is the package of fifo
 `ifndef FIFO_PKG_SV
     `define FIFO_PKG_SV
-package fifo_pkg ;
+package fifo_pkg;
 
     localparam  W_DATA      = 8;
     localparam  W_ADDR      = 4;

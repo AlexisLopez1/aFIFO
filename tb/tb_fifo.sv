@@ -1,81 +1,45 @@
-include "tester_fifo.svh";
-module tb_fifo();
-    import fifo_pkg::*;
-    bit clk = 0;
-    bit rst = 1;
-    int  i;
+module tb_fifo ();
+`include "tester_fifo.svh";
+import fifo_pkg::*;
+
+parameter BUCLE = 30;
+bit wr_clk = 1'b0;
+bit rd_clk = 1'b0;
+bit wr_rst = 1'b1;
+bit rd_rst = 1'b1;
+
+tester_fifo t;
+
+fifo_if itf();
+
+fifo_top DUT (
+	.wr_clk (wr_clk),
+	.wr_rst (wr_rst),
+	.rd_clk (rd_clk),
+	.rd_rst (rd_rst),
+	.itf	(itf.fifo)
+);
 	
-    tester_fifo #(.DEPTH(W_DEPTH)) t;
+initial begin
+	fork
+		forever #1 wr_clk = ~wr_clk;
+		forever #1 rd_clk = ~rd_clk;
+	join
+end
+	
+initial begin	
+   	t = new(itf);
 
-    tb_fifo_if itf(
-        .clk(clk)
-    );
+	#1 wr_rst = 1'b1;
+	#2 rd_rst = 1'b1;	
+    	#1 wr_rst = 1'b0;
+    	#2 rd_rst = 1'b0;	
+	#1 wr_rst = 1'b1;	
+	#2 rd_rst = 1'b1;
 
-    fifo_wrapper dut(
-    	.wrclk(clk),
-    	.wr_rst(rst),
-    	.rdclk(clk),
-   	    .rd_rst(rst),
-	    .data_in(itf.data_in),
-	    .push(itf.push),
-    	.full(itf.full),
-    	.data_out(itf.data_out),
-    	.pop(itf.pop),
-	    .empty(itf.empty)
-    );
+	repeat (BUCLE)	@(posedge wr_clk) t.push_generate();
+	repeat (BUCLE)	@(posedge rd_clk) t.pop_generate();
 
-   
-     
-    //1st case: Check equal
-    initial begin
-            rst = 1;
-        #2  rst = 0;
-        #3  rst = 1;
-        #50 rst = 0;
-        #51 rst = 1;
+end
 
-
-    end
-
-    initial begin
-	    t = new (itf);      
-        
-        #4  t.expected_push_pop();
-        #52 t.expected_push_pop();
-    end
-
-    always begin
-        forever clk = ~clk;
-    end
-
-    //2nd case: Overflow
-    // initial begin
-	// //Write
-    //     for (i = 0; i <= 20; i++) begin
-    //         #10 t.Push_Validation();
-    //     end
-        
-    //     //Read
-    //       for (i = 0; i <= 20; i++) begin
-    //         #10 t.Pop_validation(.counter(i));
-    //     end
-    // end
-
-    // //3rd case: Underflow
-    // initial begin
-    //     for (i = 0; i <= 15; i++) begin
-    //         #10 t.Push_Validation();
-    //     end
-
-    //     //Read
-    //      for (i = 0; i <= 20; i++) begin
-    //         #10 t.Pop_validation(.counter(i));
-    //     end
-	//   $stop;
-    // end
-
-    // initial begin
-    // 	forever #1 clk = !clk;
-    // end
-  
 endmodule
