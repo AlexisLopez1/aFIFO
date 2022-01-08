@@ -5,4 +5,4 @@ onbreak {resume}
 set NoQuitOnFinish 1
 vsim -voptargs=+acc work.tb_fifo
 do wave.do
-run 10ps
+run 600ps
